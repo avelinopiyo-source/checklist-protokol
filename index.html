@@ -3,74 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist - Instalaciones Nuevas</title>
+    <title>Checklist - Cuadrilla de Instalaciones Nuevas</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-gray-900 text-gray-100 font-sans min-h-screen p-4">
 
     <div class="max-w-md mx-auto bg-gray-800 rounded-2xl shadow-xl border border-gray-700 p-6">
         <h1 class="text-xl font-bold text-center text-blue-400 mb-6 uppercase tracking-wide">
-            🚀 Checklist de Instalaciones
+            🚀 Checklist de Instalaciones Nuevas
         </h1>
         
-        <form action="https://script.google.com/macros/s/AKfycby4lm4K2OR_VGE2GpGuqEL8-1XIFcqlZdK0FE-t8cdN6wAkrHjOJeI1pCcwGMeLK3Tb/exec" method="POST" class="space-y-6">
+        <form action="https://script.google.com/macros/s/AKfycbzSSyK3EPFnk6Fixat8dPlK-KVoBbfjClpo7JQYBzvReHtVwBrAxriYz-0D-YB8ZwI/exec" method="POST" class="space-y-6">
             
-            <div class="bg-gray-750 p-4 rounded-xl border border-gray-700 bg-gray-700/30">
+            <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <label class="block text-sm font-semibold text-gray-300 mb-2">Responsable de Cuadrilla:</label>
                 <input type="text" name="Tecnico" required placeholder="Nombre del técnico" 
                     class="w-full p-2.5 bg-gray-900 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500">
             </div>
 
-            <div class="bg-gray-750 p-4 rounded-xl border border-gray-700 bg-gray-700/30">
+            <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Equipos de Medición y Fusión</h2>
                 <div class="space-y-3">
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Fusionadora" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fusionadora de fibra</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Fusionadora" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fusionadora de fibra (electrodos OK y corte limpio)</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cleaver" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cortadora de precisión (cleaver)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="OTDR" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">OTDR (SC/APC y SC/UPC)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Power_Meter" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Medidor de potencia (PON meter)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="OTDR" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">OTDR con puertos SC/APC y SC/UP</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Power_Meter" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Medidor de potencia óptica (PON power meter)</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="VFL" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fuente de luz visible (VFL)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Microscopio" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Microscopio de inspección</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Microscopio" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Microscopio de inspección (Opcional)</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Localizador_Pares" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Localizador de pares / sonda</span></label>
                 </div>
             </div>
 
-            <div class="bg-gray-750 p-4 rounded-xl border border-gray-700 bg-gray-700/30">
+            <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Herramientas Manuales</h2>
                 <div class="space-y-3">
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pelacables" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pelacables de fibra</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tijeras_Kevlar" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tijeras de kevlar</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Alicate" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Alicate de corte y desforre</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pelacables" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pelacables de fibra (anillo o triangular)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tijeras_Kevlar" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tijeras de kevlar (para drop)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Alicate" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Alicate de corte y desforre de cobre</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cutter" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Navaja de precisión (cutter)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Destornilladores" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Destornilladores (Plano/Estrella/Torx)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Taladro" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Taladro percutor y brocas</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Guias_Pasacables" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Guías pasacables</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cinta_Metrica" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cinta métrica / Láser</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Destornilladores" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Destornilladores (plano, estrella, Torx)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Taladro" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Taladro percutor con brocas (6mm y 12mm)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Atornillador" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Atornillador eléctrico (Opcional)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Llave_Impacto" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Llave de impacto / llave inglesa</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Guias_Pasacables" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Guías pasacables (varillas flexibles)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cinta_Metrica" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cinta métrica (5m o láser)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Nivel" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Nivel de burbuja</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pinzas_Presion" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de presión</span></label>
                 </div>
             </div>
 
-            <div class="bg-gray-750 p-4 rounded-xl border border-gray-700 bg-gray-700/30">
+            <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Material Consumible</h2>
                 <div class="space-y-3">
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Drop_Cable" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cable de bajada (drop cable)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Drop_Cable" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cable de bajada (drop cable) autosoporte/canalización</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Rosetas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Rosetas / cajas de usuario</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Conectores_APC" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Conectores SC/APC (Min. 10)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Conectores_APC" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Conectores SC/APC (Monomodo) - Mín. 10 uds</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Conectores_UPC" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Conectores SC/UPC</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Alcohol_Isopropilico" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Alcohol isopropílico y toallitas</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pigtails" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pigtails (9/125, longitud 1.5m) de repuesto</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Empalmes" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Empalmes mecánicos o fundas termocontraíbles</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Canaletas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Canaletas plásticas - 2m</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Regletas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Regletas de 4 o 6 tomas</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tornillos_Bridas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tornillos, tacos de pared y bridas</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cintas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cinta aislante negra y cinta doble cara</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Alcohol_Isopropilico" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Alcohol isopropílico y toallitas sin pelusa</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Etiquetas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Etiquetas termorretráctiles o autoadhesivas</span></label>
                 </div>
             </div>
 
-            <div class="bg-gray-750 p-4 rounded-xl border border-gray-700 bg-gray-700/30">
-                <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Equipos Activos y Cliente</h2>
+            <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
+                <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Equipos Activos y Pasivos</h2>
                 <div class="space-y-3">
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="ONT" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">ONT (Módem)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cargador_ONT" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fuente de alimentación ONT</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Patch_Cord" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cable de parcheo Ethernet (CAT6)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="ONT" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">ONT (Unidad de red óptica) - Módem</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Fuente_ONT" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fuente de alimentación / adaptador ONT</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Patch_Cord" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cable de parcheo Ethernet (CAT6) corto (1 a 3 m)</span></label>
                 </div>
             </div>
 
-            <div class="bg-gray-750 p-4 rounded-xl border border-gray-700 bg-gray-700/30">
+            <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
+                <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Documentación y Miscelánea</h2>
+                <div class="space-y-3">
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tablet_Celular" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tablet o celular con app de gestión</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Camara" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cámara para fotografía de prueba</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Formularios" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Formularios de aceptación / Orden de Servicio</span></label>
+                </div>
+            </div>
+
+            <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <label class="block text-sm font-semibold text-gray-300 mb-2">Notas / Reporte de Faltantes:</label>
-                <textarea name="Observaciones" placeholder="Escribe si falta algo o hay reportes..." 
+                <textarea name="Observaciones" placeholder="Escribe si falta alguna herramienta o material..." 
                     class="w-full p-2 bg-gray-900 border border-gray-600 rounded-lg text-white text-sm h-20 focus:outline-none focus:border-blue-500"></textarea>
             </div>
 
