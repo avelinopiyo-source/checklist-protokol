@@ -1,0 +1,13 @@
+{
+  "name": "checklist-protokol",
+  "version": "1.0.0",
+  "description": "Generador de PDF para Google Drive",
+  "main": "api/upload.js",
+  "dependencies": {
+    "googleapis": "^140.0.0",
+    "pdfkit": "^0.15.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
