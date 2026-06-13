@@ -13,10 +13,10 @@ export default async function handler(req, res) {
     const observaciones = data.Observaciones || 'Sin especificaciones de Radios/RB.';
     const fechaActual = new Date().toLocaleDateString('es-MX');
 
-    // Tu carpeta de Google Drive asignada directamente
+    // ID fijo de tu carpeta de Google Drive
     const CARPETA_DRIVE_ID = "1d0rTRiT7eSh0cmtIFXLbbmqyRuhxbRCm"; 
 
-    // 1. Autenticación con la cuenta de servicio usando las variables de Vercel
+    // 1. Autenticación con Google Drive
     const auth = new google.auth.JWT(
       process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
       null,
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     );
     const drive = google.drive({ version: 'v3', auth });
 
-    // 2. Crear el PDF
+    // 2. Crear el documento PDF
     const doc = new PDFDocument({ margin: 40 });
     const buffers = [];
     doc.on('data', buffers.push.bind(buffers));
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       doc.on('end', () => resolve(Buffer.concat(buffers)));
     });
 
-    // --- DISEÑO VISUAL DEL REPORTE ---
+    // --- DISEÑO CORPORATIVO DEL REPORTE PDF ---
     doc.rect(0, 0, 612, 60).fill('#1a365d'); 
     doc.fillColor('#ffffff').fontSize(14).text('PROTOKOL TELECOM — CHECKLIST DE SALIDA', 25, 22, { bold: true });
     
@@ -109,7 +109,7 @@ export default async function handler(req, res) {
     const finalPdfBuffer = await pdfBuild;
     const streamPdf = Readable.from(finalPdfBuffer);
     
-    // Subir el archivo directamente a tu carpeta de Google Drive
+    // 3. Guardar el PDF directamente en tu carpeta de Google Drive
     await drive.files.create({
       requestBody: {
         name: `Checklist_${tecnico.replace(/\s+/g, '_')}_${fechaActual.replace(/\//g, '-')}.pdf`,
@@ -121,7 +121,7 @@ export default async function handler(req, res) {
       },
     });
 
-    // Pantalla de confirmación para el técnico
+    // 4. Pantalla de confirmación para el técnico
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     return res.status(200).send(`
       <div style="font-family:sans-serif; text-align:center; padding:50px; background-color:#111827; color:#fff; min-height:100vh;">
