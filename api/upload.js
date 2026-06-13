@@ -16,11 +16,16 @@ export default async function handler(req, res) {
     // Tu carpeta fija de Google Drive
     const CARPETA_DRIVE_ID = "1d0rTRiT7eSh0cmtIFXLbbmqyRuhxbRCm"; 
 
+    // Limpieza automatica de la clave para evitar el error DECODER unsupported
+    const privateKeyCleaned = process.env.GOOGLE_PRIVATE_KEY
+      ? process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n').replace(/^"(.*)"$/, '$1')
+      : '';
+
     // Autenticacion con Google Drive
     const auth = new google.auth.JWT(
       process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
       null,
-      process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      privateKeyCleaned,
       ['https://www.googleapis.com/auth/drive.file']
     );
     const drive = google.drive({ version: 'v3', auth });
