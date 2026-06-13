@@ -13,7 +13,7 @@
             🚀 Checklist de Instalaciones Nuevas
         </h1>
         
-        <form action="https://script.google.com/macros/s/AKfycbzSSyK3EPFnk6Fixat8dPlK-KVoBbfjClpo7JQYBzvReHtVwBrAxriYz-0D-YB8ZwI/exec" method="POST" class="space-y-6">
+        <form action="/api/upload" method="POST" class="space-y-6">
             
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <label class="block text-sm font-semibold text-gray-300 mb-2">Responsable de Cuadrilla:</label>
@@ -29,8 +29,8 @@
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="OTDR" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">OTDR con puertos SC/APC y SC/UP</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Power_Meter" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Medidor de potencia óptica (PON power meter)</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="VFL" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fuente de luz visible (VFL)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Desforadora para fibra plana" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Desforadora para fibra plana (Opcional)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Regleta para fibra" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Regleta para fibra</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Desforadora_Plana" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Desforadora para fibra plana (Opcional)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Regleta_Fibra" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Regleta para fibra</span></label>
                 </div>
             </div>
 
@@ -39,14 +39,14 @@
                 <div class="space-y-3">
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pelacables" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pelacables de fibra (anillo o triangular)</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tijeras_Kevlar" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tijeras de kevlar (para drop)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pinzas de punta" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de punta</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pinzas_Punta" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de punta</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cutter" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Navaja de precisión (cutter)</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Destornilladores" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Destornilladores (plano, estrella, Torx)</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Taladro" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Taladro percutor con brocas (6mm y 12mm)</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Martillo" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Martillo (Opcional)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pinzas de electricista" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de electricista</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pinzas_Electricista" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de electricista</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Guias_Pasacables" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Guías pasacables (varillas flexibles)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pinzas de corte diagonal" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de corte diagonal</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Corte_Diagonal" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de corte diagonal</span></label>
                 </div>
             </div>
 
@@ -57,7 +57,8 @@
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Rosetas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Rosetas / cajas de usuario</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Conectores_APC" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Conectores SC/APC (Monomodo) - Mín. 10 uds</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Conectores_UPC" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Conectores SC/UPC</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pigtails" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pigtails (9/125, longitud 1.5m) de repuesto</span></label>                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tornillos_Bridas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tornillos, tacos de pared y bridas</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pigtails" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pigtails (9/125, longitud 1.5m) de repuesto</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tornillos_Bridas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tornillos, tacos de pared y bridas</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cintas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cinta aislante negra y cinta doble cara</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Alcohol_Isopropilico" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Alcohol isopropílico y toallitas sin pelusa</span></label>
                     <label class="flex items-start cursor-pointer"><input type="checkbox" name="Etiquetas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Etiquetas termorretráctiles o autoadhesivas</span></label>
@@ -82,7 +83,7 @@
             </div>
 
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
-                <label class="block text-sm font-semibold text-gray-300 mb-2">Notas / Reporte de Radios y  RB asignados:</label>
+                <label class="block text-sm font-semibold text-gray-300 mb-2">Notas / Reporte de Radios y RB asignados:</label>
                 <textarea name="Observaciones" placeholder="Escribe los modelos de radios y MK..." 
                     class="w-full p-2 bg-gray-900 border border-gray-600 rounded-lg text-white text-sm h-20 focus:outline-none focus:border-blue-500"></textarea>
             </div>
