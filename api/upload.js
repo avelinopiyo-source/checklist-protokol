@@ -13,12 +13,12 @@ export default async function handler(req, res) {
     const observaciones = data.Observaciones || 'Sin especificaciones de Radios/RB.';
     const fechaActual = new Date().toLocaleDateString('es-MX');
 
-    // Tu carpeta fija de Google Drive
+    // ID de tu carpeta fija de Google Drive
     const CARPETA_DRIVE_ID = "1d0rTRiT7eSh0cmtIFXLbbmqyRuhxbRCm"; 
 
-    // Limpieza automatica de la clave para evitar el error DECODER unsupported
-    const privateKeyCleaned = process.env.GOOGLE_PRIVATE_KEY
-      ? process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n').replace(/^"(.*)"$/, '$1')
+    // Decodificar la clave en Base64 de forma ultra segura
+    const privateKeyCleaned = process.env.GOOGLE_PRIVATE_KEY_BASE64
+      ? Buffer.from(process.env.GOOGLE_PRIVATE_KEY_BASE64, 'base64').toString('utf8')
       : '';
 
     // Autenticacion con Google Drive
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
       { key: 'Conectores_UPC', label: 'Conectores SC/UPC' },
       { key: 'Pigtails', label: 'Pigtails (9/125, longitud 1.5m) de repuesto' },
       { key: 'Tornillos_Bridas', label: 'Tornillos, tacos de pared y bridas' },
-      { key: 'Cintas', label: 'Cinta aislante negra y cinta doble cara' },
+      { key: 'Cintas', line: 'Cinta aislante negra y cinta doble cara' },
       { key: 'Alcohol_Isopropilico', label: 'Alcohol isopropilico y toallitas' },
       { key: 'Etiquetas', label: 'Etiquetas termorretractiles o autoadhesivas' },
       { key: 'ONT', label: 'ONT (Unidad de red optica) - Modem' },
@@ -109,12 +109,11 @@ export default async function handler(req, res) {
     doc.moveTo(380, 730).lineTo(530, 730).stroke('#4a5568');
     doc.text('Firma Supervisor / Control', 400, 735);
 
-    doc.end();
+    doc.doc.end();
     
     const finalPdfBuffer = await pdfBuild;
     const streamPdf = Readable.from(finalPdfBuffer);
     
-    // Subir a Google Drive
     await drive.files.create({
       requestBody: {
         name: `Checklist_${tecnico.replace(/\s+/g, '_')}_${fechaActual.replace(/\//g, '-')}.pdf`,
