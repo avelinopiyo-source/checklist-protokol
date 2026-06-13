@@ -16,16 +16,18 @@ export default async function handler(req, res) {
     // ID de tu carpeta fija de Google Drive
     const CARPETA_DRIVE_ID = "1d0rTRiT7eSh0cmtIFXLbbmqyRuhxbRCm"; 
 
-    // Decodificar la clave en Base64 de forma ultra segura
-    const privateKeyCleaned = process.env.GOOGLE_PRIVATE_KEY_BASE64
-      ? Buffer.from(process.env.GOOGLE_PRIVATE_KEY_BASE64, 'base64').toString('utf8')
-      : '';
+    // Leer las credenciales completas desde la variable de entorno
+    if (!process.env.GOOGLE_CREDENTIALS_JSON) {
+      throw new Error('La variable GOOGLE_CREDENTIALS_JSON no está configurada en Vercel.');
+    }
+    
+    const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON);
 
-    // Autenticacion con Google Drive
+    // Autenticacion directa usando el objeto de credenciales completo
     const auth = new google.auth.JWT(
-      process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      credentials.client_email,
       null,
-      privateKeyCleaned,
+      credentials.private_key,
       ['https://www.googleapis.com/auth/drive.file']
     );
     const drive = google.drive({ version: 'v3', auth });
@@ -74,7 +76,7 @@ export default async function handler(req, res) {
       { key: 'Conectores_UPC', label: 'Conectores SC/UPC' },
       { key: 'Pigtails', label: 'Pigtails (9/125, longitud 1.5m) de repuesto' },
       { key: 'Tornillos_Bridas', label: 'Tornillos, tacos de pared y bridas' },
-      { key: 'Cintas', line: 'Cinta aislante negra y cinta doble cara' },
+      { key: 'Cintas', label: 'Cinta aislante negra y cinta doble cara' },
       { key: 'Alcohol_Isopropilico', label: 'Alcohol isopropilico y toallitas' },
       { key: 'Etiquetas', label: 'Etiquetas termorretractiles o autoadhesivas' },
       { key: 'ONT', label: 'ONT (Unidad de red optica) - Modem' },
@@ -109,11 +111,12 @@ export default async function handler(req, res) {
     doc.moveTo(380, 730).lineTo(530, 730).stroke('#4a5568');
     doc.text('Firma Supervisor / Control', 400, 735);
 
-    doc.doc.end();
+    doc.end();
     
     const finalPdfBuffer = await pdfBuild;
     const streamPdf = Readable.from(finalPdfBuffer);
     
+    // Subir archivo a la carpeta de Google Drive
     await drive.files.create({
       requestBody: {
         name: `Checklist_${tecnico.replace(/\s+/g, '_')}_${fechaActual.replace(/\//g, '-')}.pdf`,
