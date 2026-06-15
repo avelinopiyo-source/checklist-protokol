@@ -16,14 +16,14 @@ export default async function handler(req, res) {
     // ID de tu carpeta fija de Google Drive
     const CARPETA_DRIVE_ID = "1d0rTRiT7eSh0cmtIFXLbbmqyRuhxbRCm"; 
 
-    // Leer las credenciales completas desde la variable de entorno
+    // Verificar y leer las credenciales completas desde la variable de entorno
     if (!process.env.GOOGLE_CREDENTIALS_JSON) {
       throw new Error('La variable GOOGLE_CREDENTIALS_JSON no está configurada en Vercel.');
     }
     
     const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON);
 
-    // Autenticacion directa usando el objeto de credenciales completo
+    // Autenticación directa usando el objeto de credenciales del JSON completo
     const auth = new google.auth.JWT(
       credentials.client_email,
       null,
@@ -46,29 +46,29 @@ export default async function handler(req, res) {
     doc.fillColor('#ffffff').fontSize(14).text('PROTOKOL TELECOM — CHECKLIST DE SALIDA', 25, 22, { bold: true });
     
     doc.fillColor('#2d3748').fontSize(10).text(`Responsable de Cuadrilla: ${tecnico}`, 25, 80);
-    doc.text(`Fecha de Emision: ${fechaActual}`, 430, 80);
+    doc.text(`Fecha de Emisión: ${fechaActual}`, 430, 80);
     doc.moveTo(25, 95).lineTo(585, 95).stroke('#cbd5e0');
 
-    doc.fontSize(11).fillColor('#1a365d').text('ESTADO DE REVISION DEL INVENTARIO:', 25, 110, { underline: true });
+    doc.fontSize(11).fillColor('#1a365d').text('ESTADO DE REVISIÓN DEL INVENTARIO:', 25, 110, { underline: true });
     
     let y = 135;
     const itemsChecklist = [
       { key: 'Fusionadora', label: 'Fusionadora de fibra (electrodos OK y corte limpio)' },
-      { key: 'Cleaver', label: 'Cortadora de precision (cleaver)' },
+      { key: 'Cleaver', label: 'Cortadora de precisión (cleaver)' },
       { key: 'OTDR', label: 'OTDR con puertos SC/APC y SC/UP' },
-      { key: 'Power_Meter', label: 'Medidor de potencia optica (PON)' },
+      { key: 'Power_Meter', label: 'Medidor de potencia óptica (PON)' },
       { key: 'VFL', label: 'Fuente de luz visible (VFL)' },
       { key: 'Desforadora_Plana', label: 'Desforadora para fibra plana (Opcional)' },
       { key: 'Regleta_Fibra', label: 'Regleta para fibra' },
       { key: 'Pelacables', label: 'Pelacables de fibra (anillo o triangular)' },
       { key: 'Tijeras_Kevlar', label: 'Tijeras de kevlar (para drop)' },
       { key: 'Pinzas_Punta', label: 'Pinzas de punta' },
-      { key: 'Cutter', label: 'Navaja de precision (cutter)' },
+      { key: 'Cutter', label: 'Navaja de precisión (cutter)' },
       { key: 'Destornilladores', label: 'Destornilladores (plano, estrella, Torx)' },
       { key: 'Taladro', label: 'Taladro percutor con brocas (6mm y 12mm)' },
       { key: 'Martillo', label: 'Martillo (Opcional)' },
       { key: 'Pinzas_Electricista', label: 'Pinzas de electricista' },
-      { key: 'Guias_Pasacables', label: 'Guias pasacables (varillas flexibles)' },
+      { key: 'Guías_Pasacables', label: 'Guías pasacables (varillas flexibles)' },
       { key: 'Corte_Diagonal', label: 'Pinzas de corte diagonal' },
       { key: 'Drop_Cable', label: 'Cable de bajada (drop cable) autosoporte' },
       { key: 'Rosetas', label: 'Rosetas / cajas de usuario' },
@@ -77,13 +77,13 @@ export default async function handler(req, res) {
       { key: 'Pigtails', label: 'Pigtails (9/125, longitud 1.5m) de repuesto' },
       { key: 'Tornillos_Bridas', label: 'Tornillos, tacos de pared y bridas' },
       { key: 'Cintas', label: 'Cinta aislante negra y cinta doble cara' },
-      { key: 'Alcohol_Isopropilico', label: 'Alcohol isopropilico y toallitas' },
+      { key: 'Alcohol_Isopropilico', label: 'Alcohol isopropílico y toallitas' },
       { key: 'Etiquetas', label: 'Etiquetas termorretractiles o autoadhesivas' },
-      { key: 'ONT', label: 'ONT (Unidad de red optica) - Modem' },
-      { key: 'Fuente_ONT', label: 'Fuente de alimentacion / adaptador ONT' },
+      { key: 'ONT', label: 'ONT (Unidad de red óptica) - Módem' },
+      { key: 'Fuente_ONT', label: 'Fuente de alimentación / adaptador ONT' },
       { key: 'Patch_Cord', label: 'Cable de parcheo Ethernet (CAT6) corto' },
-      { key: 'Tablet_Celular', label: 'Tablet o celular con app de gestion' },
-      { key: 'Formularios', label: 'Formularios de aceptacion / Orden de Servicio' }
+      { key: 'Tablet_Celular', label: 'Tablet o celular con app de gestión' },
+      { key: 'Formularios', label: 'Formularios de aceptación / Orden de Servicio' }
     ];
 
     itemsChecklist.forEach((item) => {
@@ -106,11 +106,12 @@ export default async function handler(req, res) {
     doc.fillColor('#4a5568').text(observaciones, 25, y, { width: 520 });
 
     doc.moveTo(50, 730).lineTo(200, 730).stroke('#4a5568');
-    doc.text('Firma del Tecnico', 75, 735);
+    doc.text('Firma del Técnico', 75, 735);
 
     doc.moveTo(380, 730).lineTo(530, 730).stroke('#4a5568');
     doc.text('Firma Supervisor / Control', 400, 735);
 
+    // Finalizar el PDF de manera correcta
     doc.end();
     
     const finalPdfBuffer = await pdfBuild;
