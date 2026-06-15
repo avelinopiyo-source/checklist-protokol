@@ -22,6 +22,7 @@
                     class="w-full p-2.5 bg-gray-900 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500">
             </div>
 
+            <!-- EQUIPOS DE MEDICIÓN -->
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Equipos de Medición y Fusión</h2>
                 <div class="space-y-3">
@@ -35,6 +36,7 @@
                 </div>
             </div>
 
+            <!-- HERRAMIENTAS MANUALES -->
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Herramientas Manuales</h2>
                 <div class="space-y-3">
@@ -51,6 +53,7 @@
                 </div>
             </div>
 
+            <!-- MATERIAL CONSUMIBLE -->
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Material Consumible</h2>
                 <div class="space-y-3">
@@ -66,6 +69,7 @@
                 </div>
             </div>
 
+            <!-- EQUIPOS ACTIVOS -->
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Equipos Activos y Pasivos</h2>
                 <div class="space-y-3">
@@ -75,6 +79,7 @@
                 </div>
             </div>
 
+            <!-- DOCUMENTACIÓN -->
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Documentación y Miscelánea</h2>
                 <div class="space-y-3">
@@ -83,21 +88,23 @@
                 </div>
             </div>
 
+            <!-- OBSERVACIONES -->
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <label class="block text-sm font-semibold text-gray-300 mb-2">Notas / Reporte de Radios y RB asignados:</label>
                 <textarea id="Observaciones" name="Observaciones" placeholder="Escribe los modelos de radios y MK..." 
                     class="w-full p-2 bg-gray-900 border border-gray-600 rounded-lg text-white text-sm h-20 focus:outline-none focus:border-blue-500"></textarea>
             </div>
 
+            <!-- SECCIÓN DE FIRMAS DIGITALES -->
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700 space-y-4">
-                <h2 class="text-md font-bold text-blue-400 border-b border-gray-600 pb-1">Firmas Digitales Obligatorias</h2>
+                <h2 class="text-md font-bold text-blue-400 border-b border-gray-600 pb-1">Firmas Digitales</h2>
                 
                 <div>
                     <div class="flex justify-between items-center mb-1">
                         <label class="text-xs font-semibold text-gray-300">Firma del Técnico:</label>
                         <button type="button" onclick="limpiarFirma('canvasTecnico')" class="text-[10px] text-red-400 hover:underline">Borrar</button>
                     </div>
-                    <canvas id="canvasTecnico" class="w-full h-24 bg-white rounded-lg border border-gray-600 cursor-crosshair"></canvas>
+                    <canvas id="canvasTecnico" class="w-full h-24 bg-white rounded-lg border border-gray-600 touch-none cursor-crosshair"></canvas>
                 </div>
 
                 <div>
@@ -105,7 +112,7 @@
                         <label class="text-xs font-semibold text-gray-300">Firma de Supervisor / Control:</label>
                         <button type="button" onclick="limpiarFirma('canvasSupervisor')" class="text-[10px] text-red-400 hover:underline">Borrar</button>
                     </div>
-                    <canvas id="canvasSupervisor" class="w-full h-24 bg-white rounded-lg border border-gray-600 cursor-crosshair"></canvas>
+                    <canvas id="canvasSupervisor" class="w-full h-24 bg-white rounded-lg border border-gray-600 touch-none cursor-crosshair"></canvas>
                 </div>
             </div>
 
@@ -117,16 +124,14 @@
     </div>
 
     <script>
-        // Inicializar y dar soporte táctil a los paneles de firma
         function configurarFirma(canvasId) {
             const canvas = document.getElementById(canvasId);
             const ctx = canvas.getContext('2d');
             
-            // Ajustar resolucion interna del lienzo dibujo
             canvas.width = canvas.offsetWidth;
             canvas.height = canvas.offsetHeight;
             
-            ctx.strokeStyle = "#000000"; // Tinta negra corporativa para firmas
+            ctx.strokeStyle = "#000000";
             ctx.lineWidth = 2;
             ctx.lineCap = "round";
 
@@ -153,7 +158,7 @@
 
             function dibujar(e) {
                 if (!dibujando) return;
-                e.preventDefault();
+                e.preventDefault(); // Evita que la pantalla del celular se mueva al firmar
                 const pos = obtenerPosicion(e);
                 ctx.beginPath();
                 ctx.moveTo(ultimoX, ultimoY);
@@ -165,18 +170,15 @@
 
             function detenerDibujo() { dibujando = false; }
 
-            // Eventos Mouse de PC
             canvas.addEventListener('mousedown', iniciarDibujo);
             canvas.addEventListener('mousemove', dibujar);
             window.addEventListener('mouseup', detenerDibujo);
 
-            // Eventos Táctiles Celulares
             canvas.addEventListener('touchstart', iniciarDibujo);
             canvas.addEventListener('touchmove', dibujar);
             window.addEventListener('touchend', detenerDibujo);
         }
 
-        // Ejecutar configuracion al cargar la app
         window.onload = () => {
             configurarFirma('canvasTecnico');
             configurarFirma('canvasSupervisor');
@@ -213,7 +215,7 @@
             doc.setTextColor(45, 55, 72);
             doc.setFontSize(10);
             doc.text(`Responsable de Cuadrilla: ${tecnico}`, 12, 35);
-            doc.text(`Fecha de Emision: ${fechaActual}`, 145, 35);
+            doc.text(`Fecha de Emisión: ${fechaActual}`, 145, 35);
             doc.line(12, 38, 198, 38);
 
             doc.setFontSize(11);
@@ -248,7 +250,7 @@
             });
 
             y += 5;
-            if (y > 240) { doc.addPage(); y = 20; }
+            if (y > 230) { doc.addPage(); y = 20; }
             
             doc.setFont("helvetica", "bold");
             doc.text("REPORTES DE RADIOS Y RB ASIGNADOS / NOTAS:", 12, y);
@@ -256,20 +258,23 @@
             doc.setFont("helvetica", "normal");
             doc.text(observaciones || "Sin especificaciones de Radios/RB.", 12, y, { maxWidth: 180 });
 
-            // Capturar las firmas dibujadas en formato imagen Base64
+            // Capturar las firmas en Base64
             const imgTecnico = document.getElementById('canvasTecnico').toDataURL('image/png');
             const imgSupervisor = document.getElementById('canvasSupervisor').toDataURL('image/png');
 
-            // Posicionar las firmas de forma dinamica en la base del documento
+            // Asegurar espacio al final para las firmas
+            if (y > 220) { doc.addPage(); y = 30; }
+
+            // Dibujar firmas al final
             doc.line(20, 275, 80, 275);
-            doc.addImage(imgTecnico, 'PNG', 25, 250, 50, 23); // Firma Técnico sobre su línea
-            doc.text("Firma del Tecnico", 32, 280);
+            doc.addImage(imgTecnico, 'PNG', 25, 245, 50, 25); 
+            doc.text("Firma del Técnico", 32, 280);
             
             doc.line(130, 275, 190, 275);
-            doc.addImage(imgSupervisor, 'PNG', 135, 250, 50, 23); // Firma Supervisor sobre su línea
+            doc.addImage(imgSupervisor, 'PNG', 135, 245, 50, 25); 
             doc.text("Firma Supervisor / Control", 140, 280);
 
-            // Descarga automatica inmediata en el dispositivo del tecnico
+            // Descargar el archivo de forma nativa e inmediata
             doc.save(`Checklist_${tecnico.replace(/\s+/g, '_')}.pdf`);
         }
     </script>
