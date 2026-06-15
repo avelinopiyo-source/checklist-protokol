@@ -5,95 +5,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checklist - Cuadrilla de Instalaciones Nuevas</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body class="bg-gray-900 text-gray-100 font-sans min-h-screen p-4">
 
     <div class="max-w-md mx-auto bg-gray-800 rounded-2xl shadow-xl border border-gray-700 p-6">
         <h1 class="text-xl font-bold text-center text-blue-400 mb-6 uppercase tracking-wide">
-            🚀 Checklist de Herramienta y Equipos 
+            🚀 Checklist de Instalaciones Nuevas
         </h1>
         
-        <form action="/api/upload" method="POST" class="space-y-6">
+        <form id="checklistForm" class="space-y-6">
             
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <label class="block text-sm font-semibold text-gray-300 mb-2">Responsable de Cuadrilla:</label>
-                <input type="text" name="Tecnico" required placeholder="Nombre del técnico" 
+                <input type="text" id="Tecnico" name="Tecnico" required placeholder="Nombre del técnico" 
                     class="w-full p-2.5 bg-gray-900 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-blue-500">
             </div>
 
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Equipos de Medición y Fusión</h2>
                 <div class="space-y-3">
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Fusionadora" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fusionadora de fibra (electrodos OK y corte limpio)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cleaver" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cortadora de precisión (cleaver)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="OTDR" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">OTDR con puertos SC/APC y SC/UP</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Power_Meter" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Medidor de potencia óptica (PON power meter)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="VFL" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fuente de luz visible (VFL)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Desforadora_Plana" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Desforadora para fibra plana (Opcional)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Regleta_Fibra" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Regleta para fibra</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Fusionadora" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fusionadora de fibra (electrodos OK y corte limpio)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cleaver" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cortadora de precisión (cleaver)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="OTDR" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">OTDR con puertos SC/APC y SC/UP</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Power_Meter" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Medidor de potencia óptica (PON power meter)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="VFL" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fuente de luz visible (VFL)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Desforadora_Plana" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Desforadora para fibra plana (Opcional)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Regleta_Fibra" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Regleta para fibra</span></label>
                 </div>
             </div>
 
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Herramientas Manuales</h2>
                 <div class="space-y-3">
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pelacables" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pelacables de fibra (anillo o triangular)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tijeras_Kevlar" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tijeras de kevlar (para drop)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pinzas_Punta" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de punta</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cutter" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Navaja de precisión (cutter)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Destornilladores" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Destornilladores (plano, estrella, Torx)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Taladro" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Taladro percutor con brocas (6mm y 12mm)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Martillo" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Martillo (Opcional)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pinzas_Electricista" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de electricista</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Guias_Pasacables" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Guías pasacables (varillas flexibles)</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Corte_Diagonal" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de corte diagonal</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pelacables" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pelacables de fibra (anillo o triangular)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tijeras_Kevlar" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tijeras de kevlar (para drop)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pinzas_Punta" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de punta</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cutter" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Navaja de precisión (cutter)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Destornilladores" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Destornilladores (plano, estrella, Torx)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Taladro" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Taladro percutor con brocas (6mm y 12mm)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Martillo" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Martillo (Opcional)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pinzas_Electricista" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de electricista</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Guias_Pasacables" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Guías pasacables (varillas flexibles)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Corte_Diagonal" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pinzas de corte diagonal</span></label>
                 </div>
             </div>
 
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Material Consumible</h2>
                 <div class="space-y-3">
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Drop_Cable" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cable de bajada (drop cable) autosoporte/canalización</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Rosetas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Rosetas / cajas de usuario</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Conectores_APC" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Conectores SC/APC (Monomodo) - Mín. 10 uds</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Conectores_UPC" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Conectores SC/UPC</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pigtails" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pigtails (9/125, longitud 1.5m) de repuesto</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tornillos_Bridas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tornillos, tacos de pared y bridas</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cintas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cinta aislante negra y cinta doble cara</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Alcohol_Isopropilico" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Alcohol isopropílico y toallitas sin pelusa</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Etiquetas" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Etiquetas termorretráctiles o autoadhesivas</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Drop_Cable" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cable de bajada (drop cable) autosoporte/canalización</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Rosetas" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Rosetas / cajas de usuario</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Conectores_APC" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Conectores SC/APC (Monomodo) - Mín. 10 uds</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Conectores_UPC" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Conectores SC/UPC</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Pigtails" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Pigtails (9/125, longitud 1.5m) de repuesto</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tornillos_Bridas" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tornillos, tacos de pared y bridas</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Cintas" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cinta aislante negra y cinta doble cara</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Alcohol_Isopropilico" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Alcohol isopropílico y toallitas sin pelusa</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Etiquetas" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Etiquetas termorretráctiles o autoadhesivas</span></label>
                 </div>
             </div>
 
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Equipos Activos y Pasivos</h2>
                 <div class="space-y-3">
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="ONT" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">ONT (Unidad de red óptica) - Módem</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Fuente_ONT" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fuente de alimentación / adaptador ONT</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Patch_Cord" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cable de parcheo Ethernet (CAT6) corto (1 a 3 m)</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="ONT" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">ONT (Unidad de red óptica) - Módem</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Fuente_ONT" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Fuente de alimentación / adaptador ONT</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Patch_Cord" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Cable de parcheo Ethernet (CAT6) corto (1 a 3 m)</span></label>
                 </div>
             </div>
 
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <h2 class="text-md font-bold text-blue-400 mb-3 border-b border-gray-600 pb-1">Documentación y Miscelánea</h2>
                 <div class="space-y-3">
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tablet_Celular" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tablet o celular con app de gestión</span></label>
-                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Formularios" value="OK" class="mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Formularios de aceptación / Orden de Servicio</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Tablet_Celular" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Tablet o celular con app de gestión</span></label>
+                    <label class="flex items-start cursor-pointer"><input type="checkbox" name="Formularios" value="OK" class="item-check mt-1 mr-3 h-5 w-5 text-blue-500 rounded"><span class="text-sm text-gray-300">Formularios de aceptación / Orden de Servicio</span></label>
                 </div>
             </div>
 
             <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700">
                 <label class="block text-sm font-semibold text-gray-300 mb-2">Notas / Reporte de Radios y RB asignados:</label>
-                <textarea name="Observaciones" placeholder="Escribe los modelos de radios y MK..." 
+                <textarea id="Observaciones" name="Observaciones" placeholder="Escribe los modelos de radios y MK..." 
                     class="w-full p-2 bg-gray-900 border border-gray-600 rounded-lg text-white text-sm h-20 focus:outline-none focus:border-blue-500"></textarea>
             </div>
 
-            <button type="submit" 
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-transform active:scale-95">
-                Validar y Guardar Reporte
+            <div class="bg-gray-700/30 p-4 rounded-xl border border-gray-700 space-y-4">
+                <h2 class="text-md font-bold text-blue-400 border-b border-gray-600 pb-1">Firmas Digitales Obligatorias</h2>
+                
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-xs font-semibold text-gray-300">Firma del Técnico:</label>
+                        <button type="button" onclick="limpiarFirma('canvasTecnico')" class="text-[10px] text-red-400 hover:underline">Borrar</button>
+                    </div>
+                    <canvas id="canvasTecnico" class="w-full h-24 bg-white rounded-lg border border-gray-600 cursor-crosshair"></canvas>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-xs font-semibold text-gray-300">Firma de Supervisor / Control:</label>
+                        <button type="button" onclick="limpiarFirma('canvasSupervisor')" class="text-[10px] text-red-400 hover:underline">Borrar</button>
+                    </div>
+                    <canvas id="canvasSupervisor" class="w-full h-24 bg-white rounded-lg border border-gray-600 cursor-crosshair"></canvas>
+                </div>
+            </div>
+
+            <button type="button" onclick="generarReporteLocal()"
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-transform active:scale-95">
+                📥 Descargar PDF con Firmas
             </button>
         </form>
     </div>
 
+    <script>
+        // Inicializar y dar soporte táctil a los paneles de firma
+        function configurarFirma(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Ajustar resolucion interna del lienzo dibujo
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            ctx.strokeStyle = "#000000"; // Tinta negra corporativa para firmas
+            ctx.lineWidth = 2;
+            ctx.lineCap = "round";
+
+            let dibujando = false;
+            let ultimoX = 0;
+            let ultimoY = 0;
+
+            function obtenerPosicion(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            }
+
+            function iniciarDibujo(e) {
+                dibujando = true;
+                const pos = obtenerPosicion(e);
+                ultimoX = pos.x;
+                ultimoY = pos.y;
+            }
+
+            function dibujar(e) {
+                if (!dibujando) return;
+                e.preventDefault();
+                const pos = obtenerPosicion(e);
+                ctx.beginPath();
+                ctx.moveTo(ultimoX, ultimoY);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+                ultimoX = pos.x;
+                ultimoY = pos.y;
+            }
+
+            function detenerDibujo() { dibujando = false; }
+
+            // Eventos Mouse de PC
+            canvas.addEventListener('mousedown', iniciarDibujo);
+            canvas.addEventListener('mousemove', dibujar);
+            window.addEventListener('mouseup', detenerDibujo);
+
+            // Eventos Táctiles Celulares
+            canvas.addEventListener('touchstart', iniciarDibujo);
+            canvas.addEventListener('touchmove', dibujar);
+            window.addEventListener('touchend', detenerDibujo);
+        }
+
+        // Ejecutar configuracion al cargar la app
+        window.onload = () => {
+            configurarFirma('canvasTecnico');
+            configurarFirma('canvasSupervisor');
+        };
+
+        function limpiarFirma(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function generarReporteLocal() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            const tecnico = document.getElementById('Tecnico').value;
+            const observaciones = document.getElementById('Observaciones').value;
+            const fechaActual = new Date().toLocaleDateString('es-MX');
+
+            if (!tecnico) {
+                alert("Por favor, ingresa el nombre del Responsable de Cuadrilla.");
+                return;
+            }
+
+            // --- ESTILO VISUAL DEL REPORTE ---
+            doc.setFillColor(26, 54, 93); 
+            doc.rect(0, 0, 220, 25, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(14);
+            doc.text("PROTOKOL TELECOM - CHECKLIST DE SALIDA", 12, 16);
+
+            doc.setTextColor(45, 55, 72);
+            doc.setFontSize(10);
+            doc.text(`Responsable de Cuadrilla: ${tecnico}`, 12, 35);
+            doc.text(`Fecha de Emision: ${fechaActual}`, 145, 35);
+            doc.line(12, 38, 198, 38);
+
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "bold");
+            doc.text("ESTADO DE REVISIÓN DEL INVENTARIO:", 12, 47);
+
+            let y = 58;
+            doc.setFontSize(9);
+            const checkboxes = document.querySelectorAll('.item-check');
+            
+            checkboxes.forEach((cb) => {
+                const labelText = cb.parentElement.querySelector('span').innerText;
+                doc.setFont("helvetica", "bold");
+                
+                if (cb.checked) {
+                    doc.setTextColor(16, 185, 129); 
+                    doc.text("[ OK ]", 15, y);
+                } else {
+                    doc.setTextColor(239, 68, 68); 
+                    doc.text("[FALTA]", 15, y);
+                }
+                
+                doc.setTextColor(45, 55, 72);
+                doc.setFont("helvetica", "normal");
+                doc.text(labelText, 32, y);
+                y += 9;
+
+                if (y > 260) {
+                    doc.addPage();
+                    y = 20;
+                }
+            });
+
+            y += 5;
+            if (y > 240) { doc.addPage(); y = 20; }
+            
+            doc.setFont("helvetica", "bold");
+            doc.text("REPORTES DE RADIOS Y RB ASIGNADOS / NOTAS:", 12, y);
+            y += 6;
+            doc.setFont("helvetica", "normal");
+            doc.text(observaciones || "Sin especificaciones de Radios/RB.", 12, y, { maxWidth: 180 });
+
+            // Capturar las firmas dibujadas en formato imagen Base64
+            const imgTecnico = document.getElementById('canvasTecnico').toDataURL('image/png');
+            const imgSupervisor = document.getElementById('canvasSupervisor').toDataURL('image/png');
+
+            // Posicionar las firmas de forma dinamica en la base del documento
+            doc.line(20, 275, 80, 275);
+            doc.addImage(imgTecnico, 'PNG', 25, 250, 50, 23); // Firma Técnico sobre su línea
+            doc.text("Firma del Tecnico", 32, 280);
+            
+            doc.line(130, 275, 190, 275);
+            doc.addImage(imgSupervisor, 'PNG', 135, 250, 50, 23); // Firma Supervisor sobre su línea
+            doc.text("Firma Supervisor / Control", 140, 280);
+
+            // Descarga automatica inmediata en el dispositivo del tecnico
+            doc.save(`Checklist_${tecnico.replace(/\s+/g, '_')}.pdf`);
+        }
+    </script>
 </body>
 </html>
